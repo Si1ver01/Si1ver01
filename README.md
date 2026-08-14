@@ -1,16 +1,23 @@
-## Hi there 👋
+# Dmitry Danshin
 
-<!--
-**Si1ver01/Si1ver01** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+Разрабатываю frontend-инструменты и интерфейсы на TypeScript. Фокусируюсь на понятной архитектуре, проверяемом качестве и удобном опыте разработки.
 
-Here are some ideas to get you started:
+## Специализация
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+- frontend architecture и TypeScript DX;
+- React-приложения и reusable packages;
+- testing, CI и воспроизводимая поставка;
+- доступные и предсказуемые browser-интерфейсы.
+
+## Стек
+
+`TypeScript` `React` `Vite` `Node.js` `Vitest` `Playwright` `Storybook` `GitHub Actions` `Browser APIs`
+
+## Текущая работа
+
+- [`frontend-quality-starter`](https://github.com/Si1ver01/frontend-quality-starter) — шаблон React/Vite/TypeScript с единым quality loop, Vitest, Storybook, Playwright и GitHub Actions.
+- [`typed-query-state`](https://github.com/Si1ver01/typed-query-state) — TypeScript-библиотека для типобезопасной синхронизации состояния React-интерфейсов с URL query parameters.
+
+## Контакты
+
+Связаться со мной можно через [GitHub-профиль](https://github.com/Si1ver01).
