@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { validateReadme } from './check-profile-readme.mjs';
 
-const validReadme = `# Profile\n\nОписание на русском.\n\n## Специализация\n\nFrontend.\n\n## Стек\n\nTypeScript.\n\n## Текущая работа\n\n- [Проект](https://github.com/Si1ver01/example)\n\n## Контакты\n\n[GitHub](https://github.com/Si1ver01)`;
+const validReadme = `# Profile\n\nОписание на русском.\n\n## Чем занимаюсь\n\nFrontend.\n\n## Стек\n\nTypeScript.\n\n## Сейчас в работе\n\n- [Проект](https://github.com/Si1ver01/example)\n\n## Контакты\n\n[GitHub](https://github.com/Si1ver01)`;
 
 function rulesFor(source) {
   return validateReadme(source).map(({ rule }) => rule);

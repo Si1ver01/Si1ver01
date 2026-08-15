@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 
-const REQUIRED_SECTIONS = ['Специализация', 'Стек', 'Текущая работа', 'Контакты'];
+const REQUIRED_SECTIONS = ['Чем занимаюсь', 'Сейчас в работе', 'Стек', 'Контакты'];
 const ALLOWED_HOSTS = new Set(['github.com', 'npmjs.com', 'www.npmjs.com', 'registry.npmjs.org']);
 const ALLOWED_NPM_PACKAGE = '@ddanshin/typed-query-state';
 const PLACEHOLDER_PATTERN = /TODO|FIXME|your name|replace this|coming soon|Hi there|I.?m currently working on/i;
