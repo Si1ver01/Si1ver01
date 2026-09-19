@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises';
 
-const REQUIRED_SECTIONS = ['Чем занимаюсь', 'Сейчас в работе', 'Стек', 'Контакты'];
+const REQUIRED_SECTIONS = ['Чем занимаюсь', 'Стек'];
+const FORBIDDEN_SECTIONS = ['Избранные проекты', 'Сейчас в работе', 'Контакты'];
 const ALLOWED_HOSTS = new Set(['github.com', 'npmjs.com', 'www.npmjs.com', 'registry.npmjs.org']);
 const ALLOWED_NPM_PACKAGE = '@ddanshin/typed-query-state';
 const PLACEHOLDER_PATTERN = /TODO|FIXME|your name|replace this|coming soon|Hi there|I.?m currently working on/i;
@@ -37,6 +38,14 @@ export function validateReadme(source) {
     sectionCounts.set(section, matches.length);
     if (matches.length !== 1) {
       addError(errors, 'required-section', `Section "${section}" must occur exactly once`);
+    }
+  }
+
+  for (const section of FORBIDDEN_SECTIONS) {
+    const matches = source.match(new RegExp(`^## ${section}$`, 'gm')) ?? [];
+    sectionCounts.set(`forbidden:${section}`, matches.length);
+    if (matches.length > 0) {
+      addError(errors, 'deprecated-section', `Section "${section}" is no longer supported`);
     }
   }
 
@@ -92,6 +101,8 @@ export function validateReadme(source) {
   log('DEBUG', 'validation rules evaluated', {
     ruleIds: [...new Set(errors.map(({ rule }) => rule))],
     sections: Object.fromEntries(sectionCounts),
+    sectionIds: [...sectionCounts.keys()],
+    linkCategories: [...new Set(markdownLinks.map(({ url }) => url.startsWith('https://') ? 'https-external' : 'other'))],
     projectLinkCount: projectPaths.size,
   });
   return errors;
@@ -105,7 +116,14 @@ export async function checkReadme(filePath = 'README.md') {
     for (const error of errors) log('ERROR', error.message, { rule: error.rule, ...(error.line ? { line: error.line } : {}) });
     throw new Error(`README validation failed with ${errors.length} error(s)`);
   }
-  log('INFO', 'readme validation passed', { file: filePath });
+  const projectLinkCount = [...source.matchAll(/\[[^\]]+\]\(https:\/\/github\.com\/Si1ver01\/[^)]+\)/g)].length;
+  const emojiCount = [...source.matchAll(/\p{Extended_Pictographic}/gu)].length;
+  log('INFO', 'readme validation passed', {
+    file: filePath,
+    sectionCount: REQUIRED_SECTIONS.length,
+    projectLinkCount,
+    emojiCount,
+  });
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
